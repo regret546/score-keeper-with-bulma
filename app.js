@@ -18,6 +18,10 @@ const p2 = {
 function updateScores(player, opponent) {
   if (!isGameOver) {
     player.score += 1;
+
+    if (player.score === 10 && opponent.score === 9) {
+      winningScore += 2;
+    }
     if (player.score === winningScore) {
       startConfetti();
       isGameOver = true;
