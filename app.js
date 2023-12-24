@@ -19,6 +19,7 @@ function updateScores(player, opponent) {
   if (!isGameOver) {
     player.score += 1;
     if (player.score === winningScore) {
+      startConfetti();
       isGameOver = true;
       player.display.classList.add("has-text-success");
       opponent.display.classList.add("has-text-danger");
@@ -28,6 +29,20 @@ function updateScores(player, opponent) {
     player.display.textContent = player.score;
   }
 }
+
+const startConfetti = function () {
+  setTimeout(function () {
+    confetti.start();
+  }),
+    1000;
+};
+
+const stopConfetti = function () {
+  setTimeout(function () {
+    confetti.stop();
+  }),
+    5000;
+};
 
 p1.button.addEventListener("click", function () {
   updateScores(p1, p2);
@@ -46,6 +61,7 @@ resetButton.addEventListener("click", reset);
 
 function reset() {
   isGameOver = false;
+  stopConfetti();
   for (let p of [p1, p2]) {
     p.score = 0;
     p.display.textContent = 0;
